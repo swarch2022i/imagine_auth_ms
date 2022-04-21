@@ -23,21 +23,21 @@ default: &default
 
 development:
   <<: *default
-  database: imagine_auth_ms_development
+  database: imagine_auth_db
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: imagine_auth_ms
+  username: arqui
 
   # The password associated with the postgres role (username).
-  #password:
+  password: arqui
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+  host: db
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: imagine_auth_ms_test
+  database: imagine_auth_db
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: imagine_auth_ms_production
-  username: imagine_auth_ms
-  password: <%= ENV["IMAGINE_AUTH_MS_DATABASE_PASSWORD"] %>
+  database: imagine_auth_db
+  username: arqui
+  password: arqui
