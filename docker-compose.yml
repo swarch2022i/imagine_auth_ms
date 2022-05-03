@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./tmp/postgresql/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: arqui
       POSTGRES_USER: arqui

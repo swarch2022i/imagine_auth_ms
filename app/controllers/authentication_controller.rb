@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
     def login
         @user = User.find_by_username!(params[:username])
         if @user&.authenticate(params[:password])
-            payload = {user_id: @user.id, id_perfil: @user.id_perfil}
+            payload = {user_id: @user.id}
             token = JsonWebToken.encode(payload)
             time = Time.now + 24.hours.to_i
             render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),

@@ -26,9 +26,15 @@ class UsersController < ApplicationController
 
     # PUT /users/{username}
     def update
-        unless @user.update(user_params)
-        render json: { errors: @user.errors.full_messages },
-                status: :unprocessable_entity
+        if @user&.authenticate(params[:actual_password])
+            if @user.update(user_params)
+                render json: @user, status: :created
+            else
+                render json: { errors: @user.errors.full_messages },
+                        status: :unprocessable_entity
+            end
+        else
+            render json: { error: 'wrong password' }, status: :unauthorized
         end
     end
 
@@ -40,7 +46,7 @@ class UsersController < ApplicationController
     private
 
     def find_user
-        @user = User.find_by_username!(params[:_username])
+        @user = User.find_by_id!(params[:_id])
         rescue ActiveRecord::RecordNotFound
         render json: { errors: 'User not found' }, status: :not_found
     end
