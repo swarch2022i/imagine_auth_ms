@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
     # PUT /users/{username}
     def update
-        if @user&.authenticate(params[:actualPassword])
+        if @user&.authenticate(params[:actual_password])
             if @user.update(user_params)
                 render json: @user, status: :created
             else
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
     def user_params
         params.permit(
-            :username, :password, :passwordConfirmation
+            :username, :password, :password_confirmation
         )
     end
 end
