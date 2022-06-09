@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  db:
+  imagine_auth_db:
     image: postgres
     volumes:
       - ./tmp/postgresql/db:/var/lib/postgresql/data
@@ -8,10 +8,10 @@ services:
       POSTGRES_PASSWORD: arqui
       POSTGRES_USER: arqui
       POSTGRES_DB: imagine_auth_db
-  web:
+  imagine_auth_ms:
     image: imagine_auth_ms
     command: bash -c "rm -f tmp/pids/server.pid && ls && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - imagine_auth_db
